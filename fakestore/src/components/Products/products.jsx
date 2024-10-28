@@ -15,12 +15,12 @@ export default function Products({prodType}){
     }, [prodType]);
 
     return (
-        <>
+        <div className='product-page'>
             <h2> Products</h2>
             <div className='container'>
                 {products.length === 0 && <p>Loading...</p>}
                 {products.map((product) => (
-                    <div key={product.id} >
+                    <div key={product.id} className="card">
                         <h3>{product.title}</h3>
                         <img src={product.image} alt={product.title} />
 
@@ -30,6 +30,6 @@ export default function Products({prodType}){
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     )
 }
