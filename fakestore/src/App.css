@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+}
+
+.navbar {
+  background-color: #3f5a90;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.navbar a {
+  color: #ffffff; 
+  text-decoration: none; 
+  padding: 0.5rem 1rem;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+
+.navbar a:hover {
+  background-color: #9377c2; 
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
