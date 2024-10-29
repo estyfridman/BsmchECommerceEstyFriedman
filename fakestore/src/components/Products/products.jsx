@@ -10,9 +10,6 @@ export default function Products({prodType}){
         const fetchProducts = async () => {
             if (prodType === 'books') {
                 getProducts2(prodType).then(data => setProducts(data));
-
-                //    .then(response => response.json());
-
             } else {
                 const data = await getProducts(prodType);
                 setProducts(data);
@@ -32,7 +29,7 @@ export default function Products({prodType}){
                         <img src={product.image} alt={product.title} />
                         <p>{(product.description.length > 50) ? `${product.description.substring(0, 50)}...` : product.description}</p>
                         <p>${product.price}</p>
-                        <StarRating rating={product.rate} />
+                        <StarRating rating={(prodType === 'books') ? product.rate : product.rating.rate} />
                     </div>
                 ))}
             </div>
