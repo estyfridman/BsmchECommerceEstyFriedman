@@ -4,7 +4,7 @@ export function getProducts(prodType) {
     .then(response => response.json());
 }
 
-export function getProducts2(prodType) {
+export function getProducts2() {
     return fetch('http://localhost:8080/books')
     .then(response => response.json());
 }

@@ -5,16 +5,30 @@ import StarRating from '../StarRating/StarRating';
 
 export default function Products({prodType}){
     const [products, setProducts] = useState([]);
+    const [lastFetchTime, setLastFetchTime] = useState(null);
 
     useEffect(() => {
         const fetchProducts = async () => {
-            if (prodType === 'books') {
-                getProducts2(prodType).then(data => setProducts(data));
+            const currentTime = Date.now();
+            const cachedProducts = localStorage.getItem(`products_${prodType}`);
+            if (cachedProducts && currentTime - lastFetchTime < 6) {
+                setProducts(JSON.parse(cachedProducts));
             } else {
-                const data = await getProducts(prodType);
-                setProducts(data);
+                if (prodType === 'books') {
+                    getProducts2().then(data => {
+                        setProducts(data);
+                        localStorage.setItem(`products_${prodType}`, JSON.stringify(data));
+                        setLastFetchTime(currentTime);
+                    });
+                } else {
+                    const data = await getProducts(prodType);
+                    setProducts(data);
+                    localStorage.setItem(`products_${prodType}`, JSON.stringify(data));
+                    setLastFetchTime(currentTime);
+                }
             }
-        }
+        };
+
         fetchProducts();
     }, [prodType]);
 
@@ -29,7 +43,7 @@ export default function Products({prodType}){
                         <img src={product.image} alt={product.title} />
                         <p>{(product.description.length > 50) ? `${product.description.substring(0, 50)}...` : product.description}</p>
                         <p>${product.price}</p>
-                        <StarRating rating={(prodType === 'books') ? product.rate : product.rating.rate} />
+                        <StarRating rating={product.rating.rate} />
                     </div>
                 ))}
             </div>
