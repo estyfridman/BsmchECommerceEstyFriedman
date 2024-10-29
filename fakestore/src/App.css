@@ -21,9 +21,13 @@
   margin-right: 2%;
 }
 
-
 .navbar a:hover {
   background-color: #9377c2; 
   transform: scale(1.05);
   transition: transform 0.2s ease;
+}
+
+h2 {
+  margin: 0px;
+  padding: 10%;
 }
